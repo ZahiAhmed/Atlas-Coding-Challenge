@@ -12,6 +12,7 @@ def findMinTempSpread(input)
         
         d_data = {}
         
+        #fill in data hashes with corresponding values 
         labels.each.with_index do |label, i|
             d_data[label] = parts[i]
         end
@@ -26,5 +27,4 @@ def findMinTempSpread(input)
     w_data.sort_by{|d_data| d_data[:TempSpread]}[0]
 end
 
-#prints :Day of returned value
 p findMinTempSpread("w_data.dat")[:Day]

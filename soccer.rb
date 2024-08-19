@@ -13,7 +13,7 @@ def findMinDiff(input)
         #relevant data starts with a numerical value
         next if parts[0].to_i < 1 
         
-        #standings doesnt have a column name in data
+        #grabs integer value of standings column
         standing = parts.shift.to_i
         
         stats = {}
@@ -32,9 +32,8 @@ def findMinDiff(input)
         all_stats << stats
     end
     
-    #sort data by difference returns first element
+    #sort data by difference and return first element
     all_stats.sort_by{|stats| stats[:Difference]}[0]
 end
 
-#prints :Team of returned value
 p findMinDiff("soccer.dat")[:Team]
