@@ -28,7 +28,7 @@ def findMinDiff(input)
         #create standing and difference key in data hash
         stats[:Standing] = standing
 
-        if validateStats(stats)
+        if statsValid?(stats)
             stats[:Difference] = (stats[:F].to_i - stats[:A].to_i).abs
         else
             next
@@ -41,8 +41,8 @@ def findMinDiff(input)
     all_stats.sort_by{|stats| stats[:Difference]}[0]
 end
 
-#case for when data incomplete or incorrect
-def validateStats(stats)
+#cases for when data incomplete or incorrect
+def statsValid?(stats)
     if stats[:A].empty? || stats[:F].empty? || stats[:Team].empty?
         return false
     end

@@ -17,7 +17,7 @@ def findMinTempSpread(input)
             d_data[label] = parts[i]
         end
         
-        if validateWeather(d_data) 
+        if weatherValid?(d_data) 
             #create :TempSpread key for each data hash
             d_data[:TempSpread] = (d_data[:Max].to_i - d_data[:Min].to_i).abs
         else 
@@ -32,7 +32,7 @@ def findMinTempSpread(input)
 end
 
 #cases for data being incomplete or incorrect
-def validateWeather(d_data)
+def weatherValid?(d_data)
     if d_data.any? {|key,value| value.empty? || (key == :Day ? value.to_i <= 1 : value.to_i < 1 && value != "0")}
         return false
     end
