@@ -7,7 +7,7 @@ def findMinDiff(input)
     File.readlines(input).each do |line|
         parts = line.split
         
-        next if parts.length < 2
+        next if parts.length < 8
         labels = parts.map {|label| label.to_sym} if labels.empty?
 
         #relevant data starts with a numerical value
@@ -41,7 +41,7 @@ def findMinDiff(input)
     all_stats.sort_by{|stats| stats[:Difference]}[0]
 end
 
-#cases for when data incomplete or incorrect
+#cases for when data is incomplete or incorrect
 def statsValid?(stats)
     if stats[:A].empty? || stats[:F].empty? || stats[:Team].empty?
         return false

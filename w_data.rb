@@ -8,7 +8,7 @@ def findMinTempSpread(input)
         parts = line.split
         
         #relevant data starts with a numerical value
-        next if parts[0].to_i < 1 
+        next if parts[0].to_i < 1 || parts.length < 4
         
         d_data = {}
         
@@ -31,7 +31,7 @@ def findMinTempSpread(input)
     w_data.sort_by{|d_data| d_data[:TempSpread]}[0]
 end
 
-#cases for data being incomplete or incorrect
+#cases for when data is incomplete or incorrect
 def weatherValid?(d_data)
     if d_data.any? {|key,value| value.empty? || (key == :Day ? value.to_i <= 1 : value.to_i < 1 && value != "0")}
         return false
