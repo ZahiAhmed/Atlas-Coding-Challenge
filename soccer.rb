@@ -20,20 +20,34 @@ def findMinDiff(input)
         
         labels.each.with_index do |label, i| 
             #bypass "-" between :F and :A columns
-            i+=1 if parts[i].to_i < 1 unless label == :Team 
+            i+=1 if parts[i].to_i < 1 unless label == :Team || parts[i] == "0"
 
             stats[label] = parts[i]
         end
         
         #create standing and difference key in data hash
         stats[:Standing] = standing
-        stats[:Difference] = (stats[:F].to_i - stats[:A].to_i).abs
-        
+
+        if validateStats(stats)
+            stats[:Difference] = (stats[:F].to_i - stats[:A].to_i).abs
+        else
+            next
+        end
+
         all_stats << stats
     end
     
     #sort data by difference and return first element
     all_stats.sort_by{|stats| stats[:Difference]}[0]
+end
+
+#case for when data incomplete or incorrect
+def validateStats(stats)
+    if stats[:A].empty? || stats[:F].empty? || stats[:Team].empty?
+        return false
+    end
+
+    (stats[:A] == "0" || stats[:A].to_i >= 1) && (stats[:F] == "0" || stats[:F].to_i >= 1)
 end
 
 p findMinDiff("soccer.dat")[:Team]
