@@ -33,7 +33,7 @@ end
 
 #cases for when data is incomplete or incorrect
 def weatherValid?(d_data)
-    if d_data.any? {|key,value| value.empty? || (key == :Day ? value.to_i <= 1 : value.to_i < 1 && value != "0")}
+    if d_data.any? {|key,value| value.empty? || (key == :Day ? value.to_i <= 1 : value.to_i == 0 unless value == "0")}
         return false
     end
 
